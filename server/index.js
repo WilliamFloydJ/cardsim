@@ -11,7 +11,7 @@ app.use(cors());
 app.use(express.json());
 
 // GET all posts
-app.get("/api/posts", async (req, res) => {
+app.get("/api/cards", async (req, res) => {
   try {
     const { rows } = await db.query("SELECT * FROM posts");
     res.json(rows);
@@ -22,13 +22,29 @@ app.get("/api/posts", async (req, res) => {
 });
 
 // CREATE a new post
-app.post("/api/posts", async (req, res) => {
+app.post("/api/cards", async (req, res) => {
   try {
-    const { title, content } = req.body;
+    const {
+      card_name,
+      card_type,
+      card_img,
+      card_power,
+      card_toughness,
+      card_totalmana,
+    } = req.body;
+
     // Use placeholders ($1, $2) to prevent SQL injection
     const { rows } = await db.query(
-      "INSERT INTO posts(title, content) VALUES($1, $2) RETURNING *",
-      [title, content]
+      `INSERT INTO cards(card_name, card_type, card_url, card_power, card_toughness, card_totalmana)
+       VALUES($1, $2, $3, $4, $5, $6) RETURNING *`,
+      [
+        card_name,
+        card_type,
+        card_url,
+        card_power,
+        card_toughness,
+        card_totalmana,
+      ]
     );
     res.status(201).json(rows[0]);
   } catch (error) {
