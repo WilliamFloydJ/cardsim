@@ -5,17 +5,10 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>work</p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <img src="./Web-Img/MTGIcon.png" />
+        <h1>MTG Sandbox</h1>
       </header>
+      <div className="App-back"></div>
     </div>
   );
 }
