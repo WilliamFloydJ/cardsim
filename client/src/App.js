@@ -1,6 +1,7 @@
 import logo from "./logo.svg";
 import axios from "axios";
 import "./App.css";
+import DBForm from "./DBForm";
 
 function App() {
   const sendForm = () => {
@@ -32,7 +33,7 @@ function App() {
         <h1>MTG Sandbox</h1>
       </header>
       <div className="App-back">
-        <input type="file" id="img-file" />
+        <DBForm />
       </div>
     </div>
   );
