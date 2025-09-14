@@ -26,17 +26,27 @@ app.post("/api/cards", async (req, res) => {
   try {
     const {
       card_name,
-      card_type,
+      card_types,
       card_img,
       card_power,
       card_toughness,
       card_totalmana,
+      card_red,
+      card_blue,
+      card_green,
+      card_black,
+      card_white,
     } = req.body;
+
+    console.log(card_types);
+
+    const card_type = "";
+    const card_url = "";
 
     // Use placeholders ($1, $2) to prevent SQL injection
     const { rows } = await db.query(
-      `INSERT INTO cards(card_name, card_type, card_url, card_power, card_toughness, card_totalmana)
-       VALUES($1, $2, $3, $4, $5, $6) RETURNING *`,
+      `INSERT INTO cards(card_name, card_type, card_url, card_power, card_toughness, card_totalmana, card_red, card_blue, card_green, card_black, card_white)
+       VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *`,
       [
         card_name,
         card_type,
@@ -44,6 +54,11 @@ app.post("/api/cards", async (req, res) => {
         card_power,
         card_toughness,
         card_totalmana,
+        card_red,
+        card_blue,
+        card_green,
+        card_black,
+        card_white,
       ]
     );
     res.status(201).json(rows[0]);

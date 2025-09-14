@@ -10,6 +10,7 @@ const CardType = (props) => {
         id={"cardId" + props.length}
         value={cardValue}
         defaultValue={props.value}
+        className="CardType"
         onChange={(e) => setCardValue(e.target.value)}
       >
         {mtgTypes.map((type) => (

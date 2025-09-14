@@ -52,11 +52,12 @@
 }
 
 .DBForm {
-  width: 500px;
+  width: 520px;
   height: 30vw;
   min-height: fit-content;
   background-color: #122235;
   border-radius: 10px;
+  filter: drop-shadow(#000000 1px 1px 3px);
 }
 .DBForm label {
   padding: 5px;
@@ -94,6 +95,21 @@
 }
 .card-power input {
   width: 10%;
+}
+
+.mana {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.mana input {
+  width: 30px;
+  height: 30px;
+}
+
+.mana > div {
+  width: 93%;
+  justify-content: space-between !important;
 }
 
 .card-power div {
