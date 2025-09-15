@@ -67,6 +67,11 @@ const DBForm = () => {
     formData.append("card_green", cardMana[3]);
     formData.append("card_black", cardMana[4]);
     formData.append("card_green", cardMana[5]);
+    console.log(typeArr);
+    console.log(
+      cardName + " " + cardPower + " " + cardPower + " " + cardToughness
+    );
+    console.log(cardMana);
 
     axios
       .post("/api/cards", formData)

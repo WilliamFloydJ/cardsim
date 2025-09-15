@@ -4,7 +4,17 @@ const path = require("path");
 const multer = require("multer");
 const db = require("./db"); // Import our new database helper
 
-const upload = multer({ dest: "uploads/" });
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "uploads/"); // The directory where the files will be saved
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + "-" + file.originalname);
+  },
+});
+
+const upload = multer({ storage: storage });
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 
