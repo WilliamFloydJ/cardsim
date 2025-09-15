@@ -13,7 +13,7 @@ const storage = multer.diskStorage({
   },
 });
 
-const upload = multer({ storage: storage });
+const upload = multer();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -34,14 +34,12 @@ app.get("/api/cards", async (req, res) => {
 });
 
 // CREATE a new post
-app.post("/api/cards", upload.single("card_img"), async (req, res) => {
+app.post("/api/cards", upload.none(), async (req, res) => {
   console.log(req.body);
-  const cardImg = req.file;
-  const card_img_path = req.file.path;
-  console.log(card_img_path);
   try {
     const {
       card_name,
+      card_url,
       card_types,
       card_power,
       card_toughness,
@@ -52,8 +50,9 @@ app.post("/api/cards", upload.single("card_img"), async (req, res) => {
       card_black,
       card_white,
     } = req.body;
-    const card_type = "";
-    const card_url = "";
+    const card_type_arr = [...card_types];
+    const card_type_quote = card_type_arr.map((item) => `"${item}"`);
+    const card_type = `{${card_type_quote}}`;
     // Use placeholders ($1, $2) to prevent SQL injection
     const { rows } = await db.query(
       `INSERT INTO cards(card_name, card_type, card_url, card_power, card_toughness, card_totalmana, card_red, card_blue, card_green, card_black, card_white)

@@ -2,6 +2,8 @@ import { useState } from "react";
 import CardType from "./CardType";
 import axios from "axios";
 
+const imgbbKey = "fa44ed50563e8880eaf7581d2b0e0c37";
+
 const DBForm = () => {
   const [typeAmount, setTypeAmount] = useState(0);
   const [types, setTypes] = useState([{ val: "", id: typeAmount }]);
@@ -57,7 +59,6 @@ const DBForm = () => {
     typeArr.forEach((type) => {
       formData.append("card_types", type);
     });
-    formData.append("card_img", cardImg); // Use a new key for the file
     formData.append("card_power", cardPower);
     formData.append("card_toughness", cardToughness);
     formData.append("card_totalmana", cardMana[0]);
@@ -66,16 +67,23 @@ const DBForm = () => {
     formData.append("card_green", cardMana[3]);
     formData.append("card_black", cardMana[4]);
     formData.append("card_white", cardMana[5]);
-    console.log(typeArr);
-    console.log(
-      cardName + " " + cardPower + " " + cardPower + " " + cardToughness
-    );
-    console.log(cardMana);
 
+    const fileFormData = new FormData();
+    fileFormData.append("image", cardImg); // Use a new key for the file
+    fileFormData.append("key", imgbbKey);
     axios
-      .post("/api/cards", formData)
+      .post("https://api.imgbb.com/1/upload", fileFormData)
       .then((response) => {
-        console.log("Success:", response.data);
+        console.log("Success:", response.data.data.url);
+        formData.append("card_url", response.data.data.url);
+        axios
+          .post("http://localhost:5000/api/cards", formData)
+          .then((response) => {
+            console.log("Success:", response.data);
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
       })
       .catch((error) => {
         console.error("Error:", error);
