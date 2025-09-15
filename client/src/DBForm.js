@@ -77,7 +77,7 @@ const DBForm = () => {
         console.log("Success:", response.data.data.url);
         formData.append("card_url", response.data.data.url);
         axios
-          .post("http://localhost:5000/api/cards", formData)
+          .post("/api/cards", formData)
           .then((response) => {
             console.log("Success:", response.data);
           })
