@@ -37,6 +37,8 @@ app.get("/api/cards", async (req, res) => {
 app.post("/api/cards", upload.single("card_img"), async (req, res) => {
   console.log(req.body);
   const cardImg = req.file;
+  const card_img_path = req.file.path;
+  console.log(card_img_path);
   try {
     const {
       card_name,

@@ -27,7 +27,6 @@ const DBForm = () => {
     const newMana = [...cardMana];
     newMana[ind] = e.target.value;
     setCardMana(newMana);
-    console.log(cardMana);
   };
 
   const getAllTypes = () => {
@@ -66,7 +65,7 @@ const DBForm = () => {
     formData.append("card_blue", cardMana[2]);
     formData.append("card_green", cardMana[3]);
     formData.append("card_black", cardMana[4]);
-    formData.append("card_green", cardMana[5]);
+    formData.append("card_white", cardMana[5]);
     console.log(typeArr);
     console.log(
       cardName + " " + cardPower + " " + cardPower + " " + cardToughness
