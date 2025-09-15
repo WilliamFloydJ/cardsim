@@ -195,7 +195,9 @@ const DBForm = () => {
           />
         </div>
       </div>
-      <button onClick={sendForm}>Submit</button>
+      <button className="buttonForm" onClick={sendForm}>
+        Submit
+      </button>
     </div>
   );
 };
