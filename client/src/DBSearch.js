@@ -1,8 +1,10 @@
 import axios from "axios";
 import { useState } from "react";
+import DBSIndex from "./DBSIndex";
 
 const DBSearch = () => {
   const [searchText, setSearchText] = useState("");
+  const [DBSIndexs, setDBSIndexs] = useState([]);
   const searchChange = (e) => {
     setSearchText(e.target.value);
   };
@@ -12,6 +14,7 @@ const DBSearch = () => {
       .get(`/api/cards/${searchText}`)
       .then((response) => {
         console.log("Success:", response.data);
+        setDBSIndexs(response.data);
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -30,6 +33,11 @@ const DBSearch = () => {
       <button className="buttonForm" onClick={search}>
         Submit
       </button>
+      <div>
+        {DBSIndexs.map((val) => {
+          <DBSIndex val={val} />;
+        })}
+      </div>
     </div>
   );
 };
