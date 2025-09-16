@@ -10,7 +10,7 @@ const DBSearch = () => {
   };
 
   useEffect(() => {
-    if (DBSIndexs[0]) {
+    if (DBSIndexs.length > 0) {
       console.log(DBSIndexs[0].card_name);
     }
   });
