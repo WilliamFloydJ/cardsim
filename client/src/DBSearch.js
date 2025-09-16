@@ -10,7 +10,7 @@ const DBSearch = () => {
   };
 
   useEffect(() => {
-    console.log(DBSIndexs);
+    console.log(DBSIndexs[0].card_name);
   });
 
   const search = () => {
