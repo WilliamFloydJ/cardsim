@@ -41,7 +41,6 @@ const DBSearch = () => {
       </button>
       <div>
         {DBSIndexs.map((val) => {
-          console.log(val);
           return <DBSIndex val={val} key={1} />;
         })}
       </div>
