@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DBSIndex from "./DBSIndex";
 
 const DBSearch = () => {
@@ -8,6 +8,10 @@ const DBSearch = () => {
   const searchChange = (e) => {
     setSearchText(e.target.value);
   };
+
+  useEffect(() => {
+    console.log(DBSIndexs);
+  });
 
   const search = () => {
     axios
@@ -35,7 +39,7 @@ const DBSearch = () => {
       </button>
       <div>
         {DBSIndexs.map((val) => {
-          <DBSIndex val={val} />;
+          <DBSIndex val={val} key={1} />;
         })}
       </div>
     </div>
