@@ -23,9 +23,14 @@ app.use(cors());
 app.use(express.json());
 
 // GET all posts
-app.get("/api/cards", async (req, res) => {
+app.get("/api/cards/:search", async (req, res) => {
   try {
-    const { rows } = await db.query("SELECT * FROM posts");
+    const search = req.params.search;
+    const { rows } = await db.query(
+      `SELECT *
+      FROM cards
+      WHERE card_name ILIKE '%${search}%';`
+    );
     res.json(rows);
   } catch (error) {
     console.error("Error fetching posts:", error);
