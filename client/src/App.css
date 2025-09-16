@@ -149,6 +149,21 @@
   font-size: 0.8em;
 }
 
+.DBSIndex {
+  background-color: #0000005e;
+  padding: 0 20px;
+  border-radius: 10px;
+}
+
+.DBSIndex h1 {
+  background-color: #0000005e;
+  max-width: 500px;
+  border-radius: 10px;
+  font-family: MTG;
+  padding: 20px;
+  font-size: 1.2em;
+}
+
 .App-link {
   color: #61dafb;
 }
