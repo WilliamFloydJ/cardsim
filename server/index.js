@@ -22,6 +22,52 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
+app.put("/api/cards", upload.none(), async (req, res) => {
+  console.log(req.body);
+  try {
+    const {
+      card_name,
+      card_url,
+      card_types,
+      card_power,
+      card_toughness,
+      card_totalmana,
+      card_red,
+      card_blue,
+      card_green,
+      card_black,
+      card_white,
+      card_id,
+    } = req.body;
+    const card_type_arr = [...card_types];
+    const card_type_quote = card_type_arr.map((item) => `"${item}"`);
+    const card_type = `{${card_type_quote}}`;
+    // Use placeholders ($1, $2) to prevent SQL injection
+    const { rows } = await db.query(
+      `UPDATE cards
+      SET card_name = $1, card_type = $2, card_url $3, card_power = $4, card_toughness = $5, card_totalmana = $6, card_red = $7, card_blue = $8, card_green = $9, card_black = $10, card_white = $11
+       WHERE card_id = $12 RETURNING *`,
+      [
+        card_name,
+        card_type,
+        card_url,
+        card_power,
+        card_toughness,
+        card_totalmana,
+        card_red,
+        card_blue,
+        card_green,
+        card_black,
+        card_white,
+        card_id,
+      ]
+    );
+  } catch (error) {
+    console.error("Error creating post:", error);
+    res.status(500).json({ error: "Failed to create post." });
+  }
+});
+
 // GET all posts
 app.get("/api/cards/:search", async (req, res) => {
   try {

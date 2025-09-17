@@ -54,7 +54,7 @@
 .DBForm,
 .DBSearch {
   margin: 25px;
-  width: 520px;
+  min-width: 520px;
   height: 30vw;
   min-height: fit-content;
   background-color: #122235;
@@ -93,6 +93,7 @@
 }
 
 .card-power {
+  justify-content: space-evenly;
   flex-direction: row !important;
 }
 .card-power input {
@@ -150,9 +151,28 @@
 }
 
 .DBSIndex {
+  display: flex;
+
   background-color: #0000005e;
   padding: 0 20px;
   border-radius: 10px;
+}
+
+.DBFormEdit {
+  width: 46vw;
+}
+
+.DBFormEdit input {
+  width: 41px;
+  height: 30px;
+}
+
+#card-name {
+  width: 400px;
+}
+
+#img-file {
+  width: 300px;
 }
 
 .DBSIndex h1 {
@@ -162,6 +182,21 @@
   font-family: MTG;
   padding: 20px;
   font-size: 1.2em;
+}
+
+.IndexIcons {
+  padding: 5px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.IndexIcons img {
+  filter: invert(100%);
+  cursor: pointer;
+  border-radius: 5%;
+  padding: 5px;
+  width: 50px;
 }
 
 .App-link {

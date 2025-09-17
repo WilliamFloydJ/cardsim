@@ -1,17 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CardType from "./CardType";
 import axios from "axios";
 
 const imgbbKey = "fa44ed50563e8880eaf7581d2b0e0c37";
 
-const DBForm = () => {
+const DBForm = (props) => {
   const [typeAmount, setTypeAmount] = useState(0);
   const [types, setTypes] = useState([{ val: "", id: typeAmount }]);
-  const [cardName, setCardName] = useState("");
+  const [cardName, setCardName] = useState(props.card_name || "");
   const [cardImg, setCardImg] = useState(null);
-  const [cardPower, setCardPower] = useState(0);
-  const [cardToughness, setCardToughness] = useState(0);
-  const [cardMana, setCardMana] = useState([0, 0, 0, 0, 0, 0]);
+  const [cardPower, setCardPower] = useState(props.card_power || 0);
+  const [cardToughness, setCardToughness] = useState(props.card_toughness || 0);
+  const [cardMana, setCardMana] = useState(
+    props.card_mana || [0, 0, 0, 0, 0, 0]
+  );
 
   const nameChange = (e) => {
     setCardName(e.target.value);
@@ -45,11 +47,10 @@ const DBForm = () => {
     const newTypes = types.filter((val) => val.id !== ind);
     setTypes(newTypes);
   };
-  const addType = () => {
+  const addType = (val) => {
     const newTypeAmount = typeAmount + 1;
     setTypeAmount(newTypeAmount);
-    setTypes([...types, { val: "", id: newTypeAmount }]);
-    console.log(types);
+    setTypes([...types, { val: val || "", id: newTypeAmount }]);
   };
 
   const sendForm = () => {
@@ -89,6 +90,71 @@ const DBForm = () => {
         console.error("Error:", error);
       });
   };
+
+  const editForm = () => {
+    const typeArr = getAllTypes();
+    const formData = new FormData();
+    formData.append("card_name", cardName);
+    typeArr.forEach((type) => {
+      formData.append("card_types", type);
+    });
+    formData.append("card_power", cardPower);
+    formData.append("card_toughness", cardToughness);
+    formData.append("card_totalmana", cardMana[0]);
+    formData.append("card_red", cardMana[1]);
+    formData.append("card_blue", cardMana[2]);
+    formData.append("card_green", cardMana[3]);
+    formData.append("card_black", cardMana[4]);
+    formData.append("card_white", cardMana[5]);
+    formData.append("card_id", props.card_id);
+
+    if (cardImg) {
+      const fileFormData = new FormData();
+      fileFormData.append("image", cardImg); // Use a new key for the file
+      fileFormData.append("key", imgbbKey);
+      axios
+        .post("https://api.imgbb.com/1/upload", fileFormData)
+        .then((response) => {
+          console.log("Success:", response.data.data.url);
+          formData.append("card_url", response.data.data.url);
+          axios
+            .put("/api/cards", formData)
+            .then((response) => {
+              console.log("Success:", response.data);
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+            });
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    } else {
+      formData.append("card_url", props.card_url);
+      axios
+        .put("/api/cards", formData)
+        .then((response) => {
+          console.log("Success:", response.data);
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    }
+  };
+
+  useEffect(() => {
+    if (props.card_type) {
+      let amount = typeAmount;
+      const newTypes = [];
+      props.card_type.forEach((val) => {
+        const id = amount;
+        amount++;
+        newTypes.push({ val: val, id: id });
+      });
+      setTypeAmount(amount);
+      setTypes(newTypes);
+    }
+  }, []);
 
   return (
     <div className="DBForm">
