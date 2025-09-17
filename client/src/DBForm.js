@@ -54,7 +54,8 @@ const DBForm = (props) => {
   };
 
   const sendPick = () => {
-    if (props.id) {
+    console.log(props.card_id);
+    if (props.card_id) {
       editForm();
     } else {
       sendForm();
