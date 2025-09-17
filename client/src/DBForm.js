@@ -53,6 +53,14 @@ const DBForm = (props) => {
     setTypes([...types, { val: val || "", id: newTypeAmount }]);
   };
 
+  const sendPick = () => {
+    if (props.id) {
+      editForm();
+    } else {
+      sendForm();
+    }
+  };
+
   const sendForm = () => {
     const typeArr = getAllTypes();
     const formData = new FormData();
@@ -261,7 +269,7 @@ const DBForm = (props) => {
           />
         </div>
       </div>
-      <button className="buttonForm" onClick={props.id ? editForm : sendForm}>
+      <button className="buttonForm" onClick={sendPick}>
         Submit
       </button>
     </div>
