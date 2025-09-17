@@ -261,7 +261,7 @@ const DBForm = (props) => {
           />
         </div>
       </div>
-      <button className="buttonForm" onClick={sendForm}>
+      <button className="buttonForm" onClick={props.id ? editForm : sendForm}>
         Submit
       </button>
     </div>
