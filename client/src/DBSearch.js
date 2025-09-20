@@ -1,24 +1,25 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import DBSIndex from "./DBSIndex";
+const test = {
+  card_black: 0,
+  card_blue: 0,
+  card_green: 1,
+  card_id: 12,
+  card_name: "Spider-Girl , Legacy Hero",
+  card_power: 2,
+  card_red: 0,
+  card_totalmana: 2,
+  card_toughness: 2,
+  card_type: ["Legendary", "Creature", "Spider", "Human"],
+  card_url: "https://i.ibb.co/27Mbzqsc/150.jpg",
+  card_white: 1,
+};
 
 const DBSearch = () => {
   const [searchText, setSearchText] = useState("");
   const [DBSIndexs, setDBSIndexs] = useState([]);
-  const test = {
-    card_black: 0,
-    card_blue: 0,
-    card_green: 1,
-    card_id: 12,
-    card_name: "Spider-Girl , Legacy Hero",
-    card_power: 2,
-    card_red: 0,
-    card_totalmana: 2,
-    card_toughness: 2,
-    card_type: ["Legendary", "Creature", "Spider", "Human"],
-    card_url: "https://i.ibb.co/27Mbzqsc/150.jpg",
-    card_white: 1,
-  };
+
   const searchChange = (e) => {
     setSearchText(e.target.value);
   };

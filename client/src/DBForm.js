@@ -54,7 +54,6 @@ const DBForm = (props) => {
   };
 
   const sendPick = () => {
-    console.log(props.card_id);
     if (props.card_id) {
       editForm();
     } else {
@@ -101,8 +100,6 @@ const DBForm = (props) => {
   };
 
   const editForm = () => {
-    console.log("edit");
-    console.log(cardImg);
     const typeArr = getAllTypes();
     const formData = new FormData();
     formData.append("card_name", cardName);
