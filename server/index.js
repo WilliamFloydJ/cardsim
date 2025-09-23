@@ -121,7 +121,7 @@ app.get("/api/decks/:search", async (req, res) => {
     const { rows } = await db.query(
       `SELECT *
       FROM decks
-      WHERE name ILIKE ${searchString};`
+      WHERE deck_name ILIKE ${searchString};`
     );
     res.json(rows);
   } catch (error) {
@@ -134,8 +134,7 @@ app.get("/api/decks", async (req, res) => {
   try {
     const { rows } = await db.query(
       `SELECT *
-      FROM decks
-      WHERE name ILIKE '%';`
+      FROM decks;`
     );
     res.json(rows);
   } catch (error) {
