@@ -62,7 +62,7 @@ const DBSIndex = (props) => {
         className="DBDeckEdit"
         style={{ display: `${decking ? "block" : "none"}` }}
       >
-        <DBDeck />
+        <DBDeck card_id={card_id} />
       </div>
     </div>
   );

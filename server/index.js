@@ -143,6 +143,22 @@ app.get("/api/decks", async (req, res) => {
   }
 });
 
+app.get("/api/decks/cardid/:search", async (req, res) => {
+  try {
+    const search = req.params.search;
+    console.log(search);
+    const { rows } = await db.query(
+      `SELECT *
+      FROM cards_decks
+      WHERE card_id = ${search}`
+    );
+    res.json(rows);
+  } catch (error) {
+    console.error("Error fetching posts:", error);
+    res.status(500).json({ error: "Failed to fetch posts." });
+  }
+});
+
 // Serve static React files in production
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../client/build")));

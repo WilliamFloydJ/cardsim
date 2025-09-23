@@ -163,7 +163,41 @@
   height: 600px;
   width: 300px;
   margin: 25px;
+  overflow: auto;
   border-radius: 10px;
+}
+
+.DBDeck ul {
+  margin: 0;
+  padding: 0;
+}
+
+.DeckAdd {
+  border: #000000c7 2px solid;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  background-color: #28515c;
+  margin: 2px;
+}
+
+.DeckBtn {
+  display: flex;
+  border-radius: inherit;
+  justify-content: space-around;
+}
+
+.DeckAddBtn {
+  background-color: #278533 !important;
+}
+
+.DeckRemBtn {
+  background-color: #832323 !important;
+}
+
+.DeckAdd h1 {
+  margin: 5px;
+  padding: 10px !important;
 }
 
 .DBFormEdit {

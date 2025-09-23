@@ -18,7 +18,7 @@ const test = {
 
 const DBSearch = () => {
   const [searchText, setSearchText] = useState("");
-  const [DBSIndexs, setDBSIndexs] = useState([]);
+  const [DBSIndexs, setDBSIndexs] = useState([test]);
 
   const searchChange = (e) => {
     setSearchText(e.target.value);
