@@ -1,8 +1,10 @@
 import { useState } from "react";
 import DBForm from "./DBForm";
+import DBDeck from "./DBDeck";
 
 const DBSIndex = (props) => {
-  const [editing, setEditing] = useState("none");
+  const [editing, setEditing] = useState(false);
+  const [decking, setDecking] = useState(true);
 
   const {
     card_black,
@@ -36,12 +38,15 @@ const DBSIndex = (props) => {
         <h1>{card_name}</h1>
         <img src={card_url} />
         <div className="IndexIcons">
-          <img src="/Icons/edit.svg" onClick={() => setEditing("block")} />
+          <img src="/Icons/edit.svg" onClick={() => setEditing(!editing)} />
           <img src="/Icons/delete.svg" />
-          <img src="/Icons/deck.svg" />
+          <img src="/Icons/deck.svg" onClick={() => setDecking(!decking)} />
         </div>
       </div>
-      <div className="DBFormEdit" style={{ display: `${editing}` }}>
+      <div
+        className="DBFormEdit"
+        style={{ display: `${editing ? "block" : "none"}` }}
+      >
         <DBForm
           card_name={card_name}
           card_mana={edit.card_mana}
@@ -50,7 +55,14 @@ const DBSIndex = (props) => {
           card_type={card_type}
           card_id={card_id}
           card_url={card_url}
+          setEditing={setEditing}
         />
+      </div>
+      <div
+        className="DBDeckEdit"
+        style={{ display: `${decking ? "block" : "none"}` }}
+      >
+        <DBDeck />
       </div>
     </div>
   );

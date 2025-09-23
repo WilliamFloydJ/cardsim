@@ -113,6 +113,37 @@ app.post("/api/cards", upload.none(), async (req, res) => {
   }
 });
 
+app.get("/api/decks/:search", async (req, res) => {
+  try {
+    const search = req.params.search || null;
+    const searchString = `'%${search}%'`;
+    console.log(search);
+    const { rows } = await db.query(
+      `SELECT *
+      FROM decks
+      WHERE name ILIKE ${searchString};`
+    );
+    res.json(rows);
+  } catch (error) {
+    console.error("Error fetching posts:", error);
+    res.status(500).json({ error: "Failed to fetch posts." });
+  }
+});
+
+app.get("/api/decks", async (req, res) => {
+  try {
+    const { rows } = await db.query(
+      `SELECT *
+      FROM decks
+      WHERE name ILIKE '%';`
+    );
+    res.json(rows);
+  } catch (error) {
+    console.error("Error fetching posts:", error);
+    res.status(500).json({ error: "Failed to fetch posts." });
+  }
+});
+
 // Serve static React files in production
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../client/build")));

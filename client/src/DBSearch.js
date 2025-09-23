@@ -18,7 +18,7 @@ const test = {
 
 const DBSearch = () => {
   const [searchText, setSearchText] = useState("");
-  const [DBSIndexs, setDBSIndexs] = useState([]);
+  const [DBSIndexs, setDBSIndexs] = useState([test]);
 
   const searchChange = (e) => {
     setSearchText(e.target.value);
@@ -49,8 +49,8 @@ const DBSearch = () => {
         Submit
       </button>
       <div>
-        {DBSIndexs.map((val) => {
-          return <DBSIndex val={val} key={1} />;
+        {DBSIndexs.map((val, ind) => {
+          return <DBSIndex val={val} key={ind} />;
         })}
       </div>
     </div>

@@ -56,6 +56,7 @@ const DBForm = (props) => {
   const sendPick = () => {
     if (props.card_id) {
       editForm();
+      props.setEditing(false);
     } else {
       sendForm();
     }
