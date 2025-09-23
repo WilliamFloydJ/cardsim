@@ -12,7 +12,7 @@ const DeckAdd = (props) => {
 const DBDeck = () => {
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/decks`)
+      .get(`/api/decks`)
       .then((response) => {
         console.log("Success:", response.data);
       })
