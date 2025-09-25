@@ -185,6 +185,16 @@
   display: flex;
   border-radius: inherit;
   justify-content: space-around;
+  align-items: center;
+  padding: 5px;
+}
+
+.DeckBtn button {
+  background-color: rgba(175, 135, 135, 0.369);
+  border-radius: 6px;
+  font-family: MTG;
+  padding: 10px;
+  font-size: 1em;
 }
 
 .DeckAddBtn {

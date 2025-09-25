@@ -130,6 +130,21 @@ app.get("/api/decks/:search", async (req, res) => {
   }
 });
 
+app.post("/api/decks", upload.none(), async (req, res) => {
+  try {
+    const { deck_name } = req.body;
+
+    // Use placeholders ($1, $2) to prevent SQL injection
+    const { rows } = await db.query(
+      `INSERT INTO decks(deck_name)
+       VALUES('${deck_name}') RETURNING *`
+    );
+  } catch (error) {
+    console.error("Error creating post:", error);
+    res.status(500).json({ error: "Failed to create post." });
+  }
+});
+
 app.get("/api/decks", async (req, res) => {
   try {
     const { rows } = await db.query(
@@ -150,7 +165,7 @@ app.get("/api/decks/cardid/:search", async (req, res) => {
     const { rows } = await db.query(
       `SELECT *
       FROM cards_decks
-      WHERE card_id = ${search}`
+      WHERE card_id = ${search};`
     );
     res.json(rows);
   } catch (error) {

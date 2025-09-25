@@ -4,7 +4,7 @@ import DBDeck from "./DBDeck";
 
 const DBSIndex = (props) => {
   const [editing, setEditing] = useState(false);
-  const [decking, setDecking] = useState(true);
+  const [decking, setDecking] = useState(false);
 
   const {
     card_black,

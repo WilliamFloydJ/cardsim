@@ -42,17 +42,12 @@ const DBDeck = (props) => {
     white: null,
   };
 
-  const [decks, setDecks] = useState([
-    test,
-    test,
-    test,
-    test,
-    test,
-    test,
-    test,
-    test,
-    test,
-  ]);
+  const [decks, setDecks] = useState([test]);
+  const [deckName, setDeckName] = useState("");
+
+  const changeName = (e) => {
+    setDeckName(e.target.value);
+  };
 
   useEffect(() => {
     axios
@@ -65,12 +60,41 @@ const DBDeck = (props) => {
       });
   }, []);
 
+  const newDeck = () => {
+    const formData = new FormData();
+    formData.append("deck_name", deckName);
+    axios
+      .post("/api/decks", formData)
+      .then((response) => {
+        console.log("Success:", response.data);
+        setDeckName("");
+        axios
+          .get(`/api/decks`)
+          .then((res) => {
+            setDecks([...res.data]);
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+
   return (
     <div className="DBDeck">
       <ul>
         {decks.map((deck) => {
           return <DeckAdd name={deck.deck_name} cardId={props.card_id} />;
         })}
+        <li className="DeckAdd">
+          <h1>Add New</h1>
+          <div className="DeckBtn">
+            <input type="text" value={deckName} onChange={changeName} />
+            <button onClick={newDeck}>Submit</button>
+          </div>
+        </li>
       </ul>
     </div>
   );
