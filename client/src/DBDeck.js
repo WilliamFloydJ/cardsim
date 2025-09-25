@@ -23,9 +23,9 @@ const DeckAdd = (props) => {
       <h1>{props.name}</h1>
       <div className="DeckBtn">
         {add ? (
-          <h1 className="DeckAddBtn">Add</h1>
-        ) : (
           <h1 className="DeckRemBtn">Remove</h1>
+        ) : (
+          <h1 className="DeckAddBtn">Add</h1>
         )}
       </div>
     </li>
