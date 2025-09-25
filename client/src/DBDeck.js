@@ -11,6 +11,7 @@ const DeckAdd = (props) => {
         if (res.data.length > 0) {
           setAdd(true);
         }
+        console.log(res.data);
       })
       .catch((error) => {
         console.error("Error:", error);
