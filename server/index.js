@@ -47,6 +47,7 @@ WHERE card_id = ${card_id} RETURNING *;`;
     console.log(query);
     // Use placeholders ($1, $2) to prevent SQL injection
     const { rows } = await db.query(query);
+    res.json(rows);
   } catch (error) {
     console.error("Error creating post:", error);
     res.status(500).json({ error: "Failed to create post." });
@@ -107,6 +108,7 @@ app.post("/api/cards", upload.none(), async (req, res) => {
         card_white,
       ]
     );
+    res.json(rows);
   } catch (error) {
     console.error("Error creating post:", error);
     res.status(500).json({ error: "Failed to create post." });
@@ -139,6 +141,7 @@ app.post("/api/decks", upload.none(), async (req, res) => {
       `INSERT INTO decks(deck_name)
        VALUES('${deck_name}') RETURNING *`
     );
+    res.json(rows);
   } catch (error) {
     console.error("Error creating post:", error);
     res.status(500).json({ error: "Failed to create post." });
