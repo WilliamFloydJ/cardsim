@@ -161,6 +161,34 @@ app.get("/api/decks", async (req, res) => {
   }
 });
 
+app.post("/api/decks/cardid", upload.none(), async (req, res) => {
+  try {
+    const { deck_id, card_id } = req.body;
+    const { rows } = await db.query(
+      `INSERT INTO decks_cards(deck_id , card_id)
+       VALUES(${deck_id}, ${card_id}) RETURNING *`
+    );
+    res.json(rows);
+  } catch (error) {
+    console.error("Error creating post:", error);
+    res.status(500).json({ error: "Failed to create post." });
+  }
+});
+
+app.delete("/api/decks/cardid", upload.none(), async (req, res) => {
+  try {
+    const { deck_id, card_id } = req.body;
+    const { rows } = await db.query(
+      `DELETE FROM decks_cards
+       WHERE deck_id = ${deck_id} AND card_id = ${card_id} RETURNING *`
+    );
+    res.json(rows);
+  } catch (error) {
+    console.error("Error creating post:", error);
+    res.status(500).json({ error: "Failed to create post." });
+  }
+});
+
 app.get("/api/decks/cardid/:search", async (req, res) => {
   try {
     const search = req.params.search;

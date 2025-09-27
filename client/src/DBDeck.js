@@ -4,6 +4,35 @@ import axios from "axios";
 const DeckAdd = (props) => {
   const [add, setAdd] = useState(false);
 
+  const addDeckCard = (adding) => {
+    if (adding) {
+      const formData = new FormData();
+      formData.append("deck_id", props.deckId);
+      formData.append("card_id", props.cardId);
+      axios
+        .post("/api/decks/cardid", formData)
+        .then((response) => {
+          console.log("Success:", response.data);
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    } else {
+      const formData = new FormData();
+      formData.append("deck_id", props.deckId);
+      formData.append("card_id", props.cardId);
+      axios
+        .delete("/api/decks/cardid", formData)
+        .then((response) => {
+          console.log("Success:", response.data);
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    }
+    props.deckReload();
+  };
+
   useEffect(() => {
     axios
       .get(`/api/decks/cardid/${props.cardId}`)
@@ -23,9 +52,13 @@ const DeckAdd = (props) => {
       <h1>{props.name}</h1>
       <div className="DeckBtn">
         {add ? (
-          <h1 className="DeckRemBtn">Remove</h1>
+          <h1 className="DeckRemBtn" onClick={() => addDeckCard(false)}>
+            Remove
+          </h1>
         ) : (
-          <h1 className="DeckAddBtn">Add</h1>
+          <h1 className="DeckAddBtn" onClick={() => addDeckCard(true)}>
+            Add
+          </h1>
         )}
       </div>
     </li>
@@ -61,6 +94,18 @@ const DBDeck = (props) => {
       });
   }, []);
 
+  const deckReload = () => {
+    setDeckName("");
+    axios
+      .get(`/api/decks`)
+      .then((res) => {
+        setDecks([...res.data]);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+
   const newDeck = () => {
     const formData = new FormData();
     formData.append("deck_name", deckName);
@@ -68,15 +113,7 @@ const DBDeck = (props) => {
       .post("/api/decks", formData)
       .then((response) => {
         console.log("Success:", response.data);
-        setDeckName("");
-        axios
-          .get(`/api/decks`)
-          .then((res) => {
-            setDecks([...res.data]);
-          })
-          .catch((error) => {
-            console.error("Error:", error);
-          });
+        deckReload();
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -87,12 +124,23 @@ const DBDeck = (props) => {
     <div className="DBDeck">
       <ul>
         {decks.map((deck) => {
-          return <DeckAdd name={deck.deck_name} cardId={props.card_id} />;
+          return (
+            <DeckAdd
+              name={deck.deck_name}
+              cardId={props.card_id}
+              deckID={deck.deck_id}
+            />
+          );
         })}
         <li className="DeckAdd">
           <h1>Add New</h1>
           <div className="DeckBtn">
-            <input type="text" value={deckName} onChange={changeName} />
+            <input
+              type="text"
+              value={deckName}
+              onChange={changeName}
+              reload={deckReload}
+            />
             <button onClick={newDeck}>Submit</button>
           </div>
         </li>
