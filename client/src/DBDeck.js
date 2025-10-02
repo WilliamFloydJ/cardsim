@@ -30,7 +30,7 @@ const DeckAdd = (props) => {
           console.error("Error:", error);
         });
     }
-    console.log(props.reload());
+    props.reload();
   };
 
   useEffect(() => {

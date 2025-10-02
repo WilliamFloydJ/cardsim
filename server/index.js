@@ -165,7 +165,7 @@ app.post("/api/decks/cardid", upload.none(), async (req, res) => {
   try {
     const { deck_id, card_id } = req.body;
     const { rows } = await db.query(
-      `INSERT INTO decks_cards(deck_id , card_id)
+      `INSERT INTO cards_decks(deck_id , card_id)
        VALUES(${deck_id}, ${card_id}) RETURNING *`
     );
     res.json(rows);
@@ -179,7 +179,7 @@ app.delete("/api/decks/cardid", upload.none(), async (req, res) => {
   try {
     const { deck_id, card_id } = req.body;
     const { rows } = await db.query(
-      `DELETE FROM decks_cards
+      `DELETE FROM cards_decks
        WHERE deck_id = ${deck_id} AND card_id = ${card_id} RETURNING *`
     );
     res.json(rows);
