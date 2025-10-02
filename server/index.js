@@ -164,6 +164,7 @@ app.get("/api/decks", async (req, res) => {
 app.post("/api/decks/cardid", upload.none(), async (req, res) => {
   try {
     const { deck_id, card_id } = req.body;
+    console.log(deck_id, card_id);
     const { rows } = await db.query(
       `INSERT INTO cards_decks(deck_id , card_id)
        VALUES(${deck_id}, ${card_id}) RETURNING *`
