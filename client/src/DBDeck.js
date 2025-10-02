@@ -76,7 +76,7 @@ const DBDeck = (props) => {
     white: null,
   };
 
-  const [decks, setDecks] = useState([test]);
+  const [decks, setDecks] = useState([]);
   const [deckName, setDeckName] = useState("");
 
   const changeName = (e) => {
@@ -128,7 +128,7 @@ const DBDeck = (props) => {
             <DeckAdd
               name={deck.deck_name}
               cardId={props.card_id}
-              deckID={deck.deck_id}
+              deckID={deck.id}
               reload={deckReload}
             />
           );
