@@ -30,7 +30,7 @@ const DeckAdd = (props) => {
           console.error("Error:", error);
         });
     }
-    console.log(props.deckReload());
+    console.log(props.reload());
   };
 
   useEffect(() => {
@@ -129,18 +129,14 @@ const DBDeck = (props) => {
               name={deck.deck_name}
               cardId={props.card_id}
               deckID={deck.deck_id}
+              reload={deckReload}
             />
           );
         })}
         <li className="DeckAdd">
           <h1>Add New</h1>
           <div className="DeckBtn">
-            <input
-              type="text"
-              value={deckName}
-              onChange={changeName}
-              reload={deckReload}
-            />
+            <input type="text" value={deckName} onChange={changeName} />
             <button onClick={newDeck}>Submit</button>
           </div>
         </li>
