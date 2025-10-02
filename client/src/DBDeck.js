@@ -130,7 +130,7 @@ const DBDeck = (props) => {
             <DeckAdd
               name={deck.deck_name}
               cardId={props.card_id}
-              deckID={deck.deck_id}
+              deckId={deck.deck_id}
               reload={deckReload}
             />
           );
