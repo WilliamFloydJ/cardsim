@@ -6,6 +6,7 @@ const DeckAdd = (props) => {
 
   const addDeckCard = (adding) => {
     if (adding) {
+      console.log(props);
       const formData = new FormData();
       formData.append("deck_id", props.deckId);
       formData.append("card_id", props.cardId);
@@ -19,7 +20,7 @@ const DeckAdd = (props) => {
         });
     } else {
       const formData = new FormData();
-      console.log(props);
+
       formData.append("deck_id", props.deckId);
       formData.append("card_id", props.cardId);
       axios
