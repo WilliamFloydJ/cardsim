@@ -19,6 +19,7 @@ const DeckAdd = (props) => {
         });
     } else {
       const formData = new FormData();
+      console.log(props);
       formData.append("deck_id", props.deckId);
       formData.append("card_id", props.cardId);
       axios
@@ -124,12 +125,11 @@ const DBDeck = (props) => {
     <div className="DBDeck">
       <ul>
         {decks.map((deck) => {
-          console.log(deck);
           return (
             <DeckAdd
               name={deck.deck_name}
               cardId={props.card_id}
-              deckID={deck.id}
+              deckID={deck.deck_id}
               reload={deckReload}
             />
           );
