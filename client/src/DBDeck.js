@@ -124,6 +124,7 @@ const DBDeck = (props) => {
     <div className="DBDeck">
       <ul>
         {decks.map((deck) => {
+          console.log(deck);
           return (
             <DeckAdd
               name={deck.deck_name}
