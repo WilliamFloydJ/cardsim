@@ -32,6 +32,7 @@ const DeckAdd = (props) => {
   };
 
   useEffect(() => {
+    console.log("reset");
     axios
       .get(`/api/decks/cardid/${props.cardId}/${props.deckId}`)
       .then((res) => {
@@ -76,7 +77,7 @@ const DBDeck = (props) => {
     white: null,
   };
 
-  const [decks, setDecks] = useState([]);
+  const [decks, setDecks] = useState([test]);
   const [deckName, setDeckName] = useState("");
 
   const changeName = (e) => {
@@ -95,7 +96,9 @@ const DBDeck = (props) => {
   }, []);
 
   const deckReload = () => {
+    console.log("work");
     setDeckName("");
+    setDecks([]);
     axios
       .get(`/api/decks`)
       .then((res) => {
