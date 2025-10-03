@@ -77,7 +77,7 @@ const DBDeck = (props) => {
     white: null,
   };
 
-  const [decks, setDecks] = useState([test]);
+  const [decks, setDecks] = useState([]);
   const [deckName, setDeckName] = useState("");
 
   const changeName = (e) => {
