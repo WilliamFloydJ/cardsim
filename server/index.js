@@ -177,9 +177,9 @@ app.post("/api/decks/cardid", upload.none(), async (req, res) => {
 });
 
 app.delete("/api/decks/cardid", upload.none(), async (req, res) => {
+  console.log(req.body);
   try {
     const { deck_id, card_id } = req.body;
-    console.log(req.body);
     const { rows } = await db.query(
       `DELETE FROM cards_decks
        WHERE deck_id = ${deck_id} AND card_id = ${card_id} RETURNING *`
