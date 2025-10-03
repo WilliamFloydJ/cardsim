@@ -179,6 +179,7 @@ app.post("/api/decks/cardid", upload.none(), async (req, res) => {
 app.delete("/api/decks/cardid", upload.none(), async (req, res) => {
   try {
     const { deck_id, card_id } = req.body;
+    console.log(req.body);
     const { rows } = await db.query(
       `DELETE FROM cards_decks
        WHERE deck_id = ${deck_id} AND card_id = ${card_id} RETURNING *`
@@ -190,14 +191,14 @@ app.delete("/api/decks/cardid", upload.none(), async (req, res) => {
   }
 });
 
-app.get("/api/decks/cardid/:search", async (req, res) => {
+app.get("/api/decks/cardid/:cardid/:deckid", async (req, res) => {
   try {
-    const search = req.params.search;
-    console.log(search);
+    const cardId = req.params.cardid;
+    const deckId = req.params.deckid;
     const { rows } = await db.query(
       `SELECT *
       FROM cards_decks
-      WHERE card_id = ${search};`
+      WHERE card_id = ${cardId} AND deck_id = ${deckId};`
     );
     res.json(rows);
   } catch (error) {

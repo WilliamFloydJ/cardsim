@@ -37,10 +37,12 @@ const DeckAdd = (props) => {
 
   useEffect(() => {
     axios
-      .get(`/api/decks/cardid/${props.cardId}`)
+      .get(`/api/decks/cardid/${props.cardId}/${props.deckId}`)
       .then((res) => {
         if (res.data.length > 0) {
           setAdd(true);
+        } else {
+          setAdd(false);
         }
         console.log(res.data);
       })
@@ -54,13 +56,13 @@ const DeckAdd = (props) => {
       <h1>{props.name}</h1>
       <div className="DeckBtn">
         {add ? (
-          <h1 className="DeckRemBtn" onClick={() => addDeckCard(false)}>
+          <button className="DeckRemBtn" onClick={() => addDeckCard(false)}>
             Remove
-          </h1>
+          </button>
         ) : (
-          <h1 className="DeckAddBtn" onClick={() => addDeckCard(true)}>
+          <button className="DeckAddBtn" onClick={() => addDeckCard(true)}>
             Add
-          </h1>
+          </button>
         )}
       </div>
     </li>
