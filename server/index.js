@@ -176,13 +176,13 @@ app.post("/api/decks/cardid", upload.none(), async (req, res) => {
   }
 });
 
-app.delete("/api/decks/cardid", upload.none(), async (req, res) => {
-  console.log(req.body);
+app.delete("/api/decks/cardid/:cardid/:deckid", async (req, res) => {
   try {
-    const { deck_id, card_id } = req.body;
+    const cardId = req.params.cardid;
+    const deckId = req.params.deckid;
     const { rows } = await db.query(
       `DELETE FROM cards_decks
-       WHERE deck_id = ${deck_id} AND card_id = ${card_id} RETURNING *`
+       WHERE deck_id = ${deckId} AND card_id = ${cardId} RETURNING *`
     );
     res.json(rows);
   } catch (error) {

@@ -19,12 +19,8 @@ const DeckAdd = (props) => {
           console.error("Error:", error);
         });
     } else {
-      const formData = new FormData();
-
-      formData.append("deck_id", props.deckId);
-      formData.append("card_id", props.cardId);
       axios
-        .delete("/api/decks/cardid", formData)
+        .delete(`/api/decks/cardid/${props.cardId}/${props.deckId}`)
         .then((response) => {
           console.log("Success:", response.data);
         })
