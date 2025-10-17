@@ -1,5 +1,5 @@
 import { useState } from "react";
-import mtgTypes from "./MTGTypes";
+import mtgTypes from "../MTGTypes";
 
 const CardType = (props) => {
   const [cardValue, setCardValue] = useState(props.val || "");

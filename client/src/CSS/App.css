@@ -1,6 +1,6 @@
 @font-face {
   font-family: "MTG"; /* Choose a descriptive name for your font */
-  src: url("../public/Magicmedieval-pRV1.ttf") format("truetype"); /* Specify the path to your .ttf file and its format */
+  src: url("../../public/Magicmedieval-pRV1.ttf") format("truetype"); /* Specify the path to your .ttf file and its format */
   font-weight: normal; /* Optional: Define font weight */
   font-style: normal; /* Optional: Define font style */
 }
@@ -8,7 +8,7 @@
 .App {
   text-align: center;
 }
-.App-header > img {
+.App-header img {
   margin-left: 7vw;
   height: 6.8vw;
   width: 6.8vw;
@@ -29,6 +29,7 @@
 .App-header {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   width: 100%;
   height: 7vw;
   filter: drop-shadow(#000000 1px 1px 3px);
@@ -37,8 +38,31 @@
   color: #ec9c25;
 }
 
+.App-header > div {
+  display: flex;
+  align-items: center;
+}
+
+.App-header ul {
+  display: flex;
+  list-style: none;
+}
+
+.App-header li {
+  margin: 0 30px;
+}
+
+.App-header a {
+  filter: drop-shadow(#000000 1px 1px 3px);
+  padding-top: 5px;
+  font-family: "MTG";
+  font-size: 4em;
+  text-decoration: none;
+  color: #ec9c25;
+}
+
 .App-back {
-  background-image: url("../public/Web-Img/main-background.jpg");
+  background-image: url("../../public/Web-Img/main-background.jpg");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -49,6 +73,22 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.App-title {
+  color: #ec9c25;
+  font-family: "MTG";
+  letter-spacing: 6px;
+  background-color: #122235;
+  padding: 25px 40px 20px 40px;
+  border-radius: 10px;
+  filter: drop-shadow(#000000 1px 1px 3px);
+  margin: 0.8em 0;
+}
+
+.App-title > h1 {
+  margin: 0;
+  filter: drop-shadow(#ff0000 0px 0px 1px) drop-shadow(#000000 2px 2px 1px);
 }
 
 .DBForm,
